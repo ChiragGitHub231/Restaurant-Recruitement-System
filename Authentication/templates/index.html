@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+	<title>RestroJobs</title>
+	<!-- Meta tag Keywords -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8" />
+	<meta name="keywords" content="Snacks Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+
+		function onWindowClosing(){
+			if(window.event.clientX < 0 || window.event.clientY < 0){
+				$.ajax({
+					type: "POST",
+					url: "{% url 'logout' %}"
+				});
+			}
+		};
+
+		function onKeydown(event){
+			if(event != undefined && event.altKey && event.KeyCode == 115){		//Alt + F4
+				$.ajax({
+					type: "POST",
+					url: "{% url 'logout' %}"
+				})
+			} 
+		};
+
+		window.onbeforeunload = onWindowClosing;
+		window.document.onKeydown = onKeydown;
+
+	</script>
+	<!--// Meta tag Keywords -->
+
+	<!-- Custom-Files -->
+	<link rel="stylesheet" href="/static/css/bootstrap.css">
+	<!-- Bootstrap-Core-CSS -->
+	<link rel="stylesheet" href="/static/css/smoothbox.css" type='text/css' media="all" />
+	<!-- gallery light box -->
+	<link rel="stylesheet" href="/static/css/style.css" type="text/css" media="all" />
+	<!-- Style-CSS -->
+	<link rel="stylesheet" href="/static/css/fontawesome-all.css">
+	<!-- Font-Awesome-Icons-CSS -->
+	<!-- //Custom-Files -->
+
+	<!-- Web-Fonts -->
+	<link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&amp;subset=latin-ext"
+	    rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=latin-ext"
+	    rel="stylesheet">
+	<!-- //Web-Fonts -->
+
+</head>
+
+<body>
+	<!-- header -->
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light py-4">
+			<div class="container">
+				<h1>
+					<a class="navbar-brand" href="{% url 'index' %}">
+						<i class="fas fa-utensils"></i>Food Paradise
+					</a>
+				</h1>
+				<button class="navbar-toggler ml-md-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+				    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+					<ul class="navbar-nav mx-auto text-center">
+						<li class="nav-item active">
+							<a class="nav-link" href="{% url 'index' %}">Home
+								<span class="sr-only">(current)</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link scroll" href="#about">About</a>
+						</li>
+
+						{% if user.is_authenticated %}
+
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+							    aria-haspopup="true" aria-expanded="false">
+								Apply
+							</a>
+							<div class="dropdown-menu text-lg-left text-center" aria-labelledby="navbarDropdown">
+								<a href="{% url 'chef-application' %}" style="color: black;">For Chef</a><br>
+								<a href="{% url 'manager-application' %}" style="color: black;">For Manager</a><br>
+								<a href="{% url 'waiter-application' %}" style="color: black;">For Waiter</a>
+							</div>
+						</li>
+
+						{% endif %}
+
+						 <li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+							    aria-haspopup="true" aria-expanded="false">
+								Pages
+							</a>
+							<div class="dropdown-menu text-lg-left text-center" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item scroll" href="#services">Services</a>
+								<a class="dropdown-item scroll" href="#specials">Specials</a>
+								<!-- <div class="dropdown-divider"></div> -->
+								<a class="dropdown-item scroll" href="#gallery">Gallery</a>
+							</div>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link scroll" href="#contact">Contact Us</a>
+						</li>
+					</ul>
+					<div class="forms-w3ls-agilesm text-center mt-lg-0 mt-4">
+						<ul class="navbar-nav mx-auto text-center">
+							{% if user.is_authenticated %}
+
+							<!-- <li> -->
+								<!-- <p style="color: white">Welcome, {{ user.username }}</p>-->
+								<!-- <a href="{% url 'logout' %}" 
+								onmouseover="this.style.backgroundColor='red'" 
+								onmouseout="this.style.backgroundColor=''" style="color: white;">Logout</a>  -->
+							<!-- </li> -->
+
+							<li class="login-list-w3ls d-inline border-right pr-3 mr-3">
+								<a href="{% url 'user-profile' %}" class="text-white" 
+								onmouseover="this.style.backgroundColor='red'" 
+								onmouseout="this.style.backgroundColor=''">User Profile</a>
+							</li>
+							<!-- <li class="login-list-w3ls d-inline border-right pr-3 mr-3">
+								<p class="text-white">Welcome, {{ user.username }}</p>
+							</li> -->
+						
+							<li class="login-list-w3ls d-inline">
+								<a href="{% url 'logout' %}" class="text-white" 
+								onmouseover="this.style.backgroundColor='red'" 
+								onmouseout="this.style.backgroundColor=''">Logout</a>
+							</li>
+
+							{% else %}
+							<li class="login-list-w3ls d-inline border-right pr-3 mr-3">
+								<a href="{% url 'login' %}" class="text-white" 
+								onmouseover="this.style.backgroundColor='red'" 
+								onmouseout="this.style.backgroundColor=''">Login</a>
+							</li>
+							<li class="login-list-w3ls d-inline">
+								<a href="{% url 'signup' %}" class="text-white" 
+								onmouseover="this.style.backgroundColor='red'" 
+								onmouseout="this.style.backgroundColor=''">Register</a>
+							</li>
+
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!-- login -->
+	<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header text-center">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="login px-sm-4 mx-auto mw-100">
+						<h5 class="text-center mb-4">Login Form</h5>
+						<form action="#" method="post">
+							<div class="form-group">
+								<!-- <label>Username</label> -->
+								<input type="text" class="form-control" name="name" placeholder="Username" required="">
+							</div>
+							<div class="form-group">
+								<!-- <label class="mb-2">Password</label> -->
+								<input type="password" class="form-control" name="password" placeholder="Password" required="">
+							</div>
+							<button type="submit" class="btn btn-primary submit mb-4">Login</button>
+							<p class="text-center pb-3">
+								<a href="#">Forgot your password?</a>
+							</p>
+							<p class="text-center pb-4 create-w3ls">
+								New User?
+								<a href="#" data-toggle="modal" data-target="#exampleModalCenter2">Register here</a>
+							</p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+	<!-- banner -->
+	<div class="callbacks_container">
+		<ul class="rslides" id="slider3">
+			<li>
+				<div class="slider-info bg1">
+					<div class="w3l-overlay" style="background: url(../images/2.jpg)no-repeat center;">
+						<div class="banner-text text-center container">
+							<h3 class="text-white mb-md-4 mb-3">Come to the luxurious 
+								<span>Tasty Foods</span>
+							</h3>
+							<p class="movetxt text-white mb-4"><h4 style="color: white;">
+								"Food paradise" is a delicious destination with unmatched ambience and gives mesmerized experience!
+							</h4></p>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="slider-info bg2">
+					<div class="w3l-overlay" style="background: url(../images/1.jpg)no-repeat center;">
+						<div class="banner-text text-center container">
+							<h3 class="text-white mb-md-4 mb-3">Come to the luxurious 
+								<span>Tasty Foods</span>
+							</h3>
+							<p class="movetxt text-white mb-4"><h4 style="color: white;">
+								"Food paradise" is a delicious destination with unmatched ambience and gives mesmerized experience!
+							</h4></p>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<!-- //banner -->
+
+	<!-- about -->
+	<div class="about py-5" id="about">
+		<div class="container py-xl-5 py-lg-3">
+			<h3 class="title text-center text-dark mb-sm-5 mb-4">
+				<span>Welcome to our Restaurant</span> Food for body & soul</h3>
+			<div class="row about-bottom-w3l text-center pt-lg-5">
+
+				{% for fi in food_info %}
+
+				<div class="col-sm-6 about-grid" style="margin-bottom: 25px;">
+					<div class="about-grid-main">
+						<img src="{{ fi.image.url }}" alt="" class="img-fluid">
+						<h4 class="mb-3">{{ fi.message }}</h4>
+						<p>{{ fi.item_detail }}</p>
+						<a href="#" class="button-w3ls mt-4" data-toggle="modal">Read More
+							<i class="fas fa-long-arrow-alt-right ml-3"></i>
+						</a>
+					</div>
+				</div>
+
+				{% endfor %}
+				
+			</div>
+		</div>
+	</div>
+	<!-- //about -->
+
+	<!-- services -->
+	<div class="w3ls-middle pt-5" id="services">
+		<div class="container py-xl-5 py-lg-3">
+			<h3 class="title text-center text-dark mb-sm-5 mb-4">
+				<span>The great advantages</span> of a hotel is that it is a refuge from home life</h3>
+			<div class="row pt-lg-5">
+				<div class="col-lg-6 text-center">
+					<img src="static/images/3.png" alt="" class="img-fluid chef-img">
+				</div>
+				<div class="col-lg-4 mt-lg-0 mt-4">
+
+					{% for si in service_info %}
+
+					<div class="service1-wthree">
+						<h4> {{ si.number }} </h4>
+						<h6 class="text-dark mt-4 mb-2"> {{ si.title }} </h6>
+						<p> {{ si.service_detail }} </p>
+					</div>
+
+					{% endfor%}
+
+				</div>
+				<div class="offset-lg-2"></div>
+			</div>
+		</div>
+	</div>
+	<!-- //services -->
+
+	<!-- middle section one -->
+	<div class="w3ls-middle-works py-5 text-center" id="specials">
+		<h3 class="title text-center text-dark mb-lg-5"><span>Our Specials</span></h3>
+		<div class="py-xl-5 py-lg-3" style="margin-top: -70px;">
+			<h3 class="title text-center text-dark mb-lg-5">
+				<span>Fresh, organic ingredients,</span>Carefully prepared, Eat green for a reason.</h3>
+
+			{% for fd in feature_details %}
+
+			<div class="d-flex special-agiles text-left">
+				<div class="col-md-6 grids-w3ls-left" style="margin-top: 60px;">
+					<p class="mb-2 text-white"> {{ fd.feature_title }} </p>
+					<h4 class="title text-dark mb-md-4"> {{ fd.feature_description }}</h4>
+					<a href="#" class="button-w3ls mt-4" data-toggle="modal">Read More
+						<i class="fas fa-long-arrow-alt-right ml-3"></i>
+					</a>
+				</div>
+				<div class="col-md-6 grids-w3ls-right">
+					<img src="{{ fd.feature_image.url }}" alt="" class="img-fluid">
+				</div>
+			</div>
+
+			{% endfor %}
+
+	<!-- gallery -->
+	<div class="gallery pt-5" id="gallery">
+		<div class="w3ls-middle-works py-5 text-center" id="specials">
+			<h3 class="title text-center text-dark mb-lg-2"><span>Gallery</span></h3>
+		</div>
+		<div class="container py-xl-5 py-lg-5" style="margin-top: -100px;">
+			<div class="row gallery_grids">
+
+				{% for gi in gallary_images %}
+
+				<div class="col-4 agile-gallery_grid_main">
+
+					<div class="gallery-img-grid hover14 column">
+						<div class="gallery_effect">
+							<a href="{{ gi.images.url }}" class="sb" title="{{ gi.title }}">
+								<figure>
+									<img src="{{ gi.images.url }}" alt=" " class="img-fluid" />
+								</figure>
+							</a>
+						</div>
+					</div>
+				
+				</div>
+
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+	<!-- //gallery -->
+
+	<!-- contact -->
+	<div class="address py-5" id="contact">
+		<div class="container py-xl-5 py-lg-3">
+			<h3 class="title text-center text-dark mb-sm-5 mb-4">
+				<span>Contact US</span> world's no.1 tasty food</h3>
+			<div class="row address-row pt-lg-5">
+				<div class="col-lg-6">
+
+					{% for rd in restaurant_details %}
+
+					<div class="address-right p-sm-5 p-4">
+						<div class="address-info wow fadeInRight animated" data-wow-delay=".5s">
+							<h4 class="mb-3">Address</h4>
+							<p>{{ rd.address }}
+								<span>{{ rd.city }}, {{ rd.state }}</span>
+							</p>
+						</div>
+						<div class="address-info wow fadeInRight animated my-sm-5 my-4" data-wow-delay=".5s">
+							<h4 class="mb-3">Phone </h4>
+							<p>+91 {{ rd.contact_1 }}</p>
+							<p>+91 {{ rd.contact_2 }}</p>
+						</div>
+						<div class="address-info agileits-info wow fadeInRight animated" data-wow-delay=".5s">
+							<h4 class="mb-3">Mail</h4>
+							<p>
+								<a href="mailto:example@mail.com"> {{ rd.mail_1 }}</a>
+							</p>
+							<p>
+								<a href="mailto:example@mail.com"> {{ rd.mail_2 }}</a>
+							</p>
+						</div>
+					</div>
+
+					{% endfor %}
+
+				</div>
+				<div class="col-lg-6 address-left wow agile fadeInLeft animated mt-lg-0 mt-5" data-wow-delay=".5s">
+					<div class="address-grid p-sm-5 p-4">
+						<h4 class="wow fadeIndown animated mb-3" data-wow-delay=".5s">Get In Touch</h4>
+						<form action="{% url 'contact_us' %}" method="post">
+							{% csrf_token %}
+							<div class="form-group">
+								<input type="text" placeholder="Name" name="name" class="form-control" required="">
+							</div>
+							<div class="form-group">
+								<input type="email" placeholder="Email" name="email" class="form-control" required="">
+							</div>
+							<div class="form-group">
+								<textarea placeholder="Message"  name="message" class="form-control" required=""></textarea>
+							</div>
+							{% csrf_token %}
+							<input type="submit" value="SEND">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--//contact-->
+
+	<!-- footer -->
+	<footer class="pt-5">
+		<div class="container py-xl-5 py-lg-3">
+			<div class="row footer-grids py-4">
+				<div class="col-lg-4 footer-grid text-left">
+					<div class="footer-logo">
+						<h2 class="mb-3">
+							<a class="logo text-white" href="{% url 'index' %}">
+								<i class="fas fa-utensils mr-2"></i>Paradise Food</a>
+						</h2>
+					</div>
+				</div>
+				<div class="col-lg-2 col-6  footer-grid my-lg-0 my-4">
+					<h3 class="mb-sm-4 mb-3 pb-3">Menu</h3>
+					<ul class="list-unstyled">
+						<li>
+							<a href="{% url 'index' %}">Home</a>
+						</li>
+						<li class="my-2">
+							<a class="scroll" href="#about">About</a>
+						</li>
+						<li>
+							<a class="scroll" href="#services">Services</a>
+						</li>
+						<li class="my-2">
+							<a class="scroll" href="#gallery">Gallery</a>
+						</li>
+						<!-- <li>
+							<a class="scroll" href="#contact">Contact Us</a>
+						</li> -->
+					</ul>
+				</div>
+				<div class="col-lg-2 col-6 footer-grid my-lg-0 my-4">
+					<h3 class="mb-sm-4 mb-3 pb-3"> Navigation </h3>
+					<ul class="list-unstyled">
+						<li>
+							<a class="scroll" href="#services">Advantages</a>
+						</li>
+						<li class="my-2">
+							<a class="scroll" href="#specials">Specials</a>
+						</li>
+						<!-- <li>
+							<a class="scroll" href="#some">Some More</a>
+						</li> -->
+						<li class="my-2">
+							<a class="scroll" href="#gallery">Gallery</a>
+						</li> 
+					</ul>
+				</div>
+				<!-- <div class="col-lg-2 col-6 footer-grid">
+					<h3 class="mb-sm-4 mb-3 pb-3"> Company</h3>
+					<ul class="list-unstyled">
+						<li>
+							<a href="#">Link Here</a>
+						</li>
+						<li class="my-2">
+							<a href="#">Link Here</a>
+						</li>
+						<li>
+							<a href="#">Link Here</a>
+						</li>
+					</ul>
+				</div> -->
+				<div class="col-lg-2 col-6 footer-grid footer-contact">
+					<h3 class="mb-sm-4 mb-3 pb-3"> Contact Us</h3>
+					<ul class="list-unstyled">
+						<li>
+							+91 98256 92326
+						</li>
+						<li class="mt-2">
+							<a href="mailto:info@example.com">info@example.com</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- copyright -->
+		<div class="copy_right">
+			<p class="text-center text-white py-sm-4 py-3">© 2023 ParadiseFood. All rights reserved | Design by Chirag and Pruthvi </p>
+		</div>
+		<!-- //copyright -->
+	</footer>
+	<!-- //footer -->
+
+
+	<!-- Js files -->
+	<!-- JavaScript -->
+	<script src="/static/js/jquery-2.2.3.min.js"></script>
+	<!-- Default-JavaScript-File -->
+
+	<!-- banner slider -->
+	<script src="/static/js/responsiveslides.min.js"></script>
+	<script>
+		// You can also use "$(window).load(function() {"
+		$(function () {
+			// Slideshow 4
+			$("#slider3").responsiveSlides({
+				auto: true,
+				pager: true,
+				nav: false,
+				speed: 500,
+				namespace: "callbacks",
+				before: function () {
+					$('.events').append("<li>before event fired.</li>");
+				},
+				after: function () {
+					$('.events').append("<li>after event fired.</li>");
+				}
+			});
+
+		});
+	</script>
+	<!-- //banner slider -->
+
+	<!-- password-script -->
+	<script>
+		window.onload = function () {
+			document.getElementById("password1").onchange = validatePassword;
+			document.getElementById("password2").onchange = validatePassword;
+		}
+
+		function validatePassword() {
+			var pass2 = document.getElementById("password2").value;
+			var pass1 = document.getElementById("password1").value;
+			if (pass1 != pass2)
+				document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+			else
+				document.getElementById("password2").setCustomValidity('');
+			//empty string means no validation error
+		}
+	</script>
+	<!-- //password-script -->
+
+	<!-- gallery light box -->
+	<script src="/static/js/smoothbox.jquery2.js"></script>
+	<!-- //gallery light box -->
+
+	<!-- smooth scrolling -->
+	<script src="/static/js/SmoothScroll.min.js"></script>
+	<!-- //smooth scrolling -->
+
+	<!-- move-top -->
+	<script src="/static/js/move-top.js"></script>
+	<!-- easing -->
+	<script src="/static/js/easing.js"></script>
+	<!--  necessary snippets for few javascript files -->
+	<script src="/static/js/snacks.js"></script>
+
+	<script src="/static/js/bootstrap.js"></script>
+	<!-- Necessary-JavaScript-File-For-Bootstrap -->
+	<!-- //Js files -->
+
+</body>
+
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Job Application Form</title>
+<!-- for-mobile-apps -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta name="keywords" content="Job Application Form Widget Responsive, Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<!-- //for-mobile-apps -->
+<link href='//fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/static/Application_Form_CSS/application_j-forms.css">
+<link href="/static/Application_Form_CSS/application_form_style.css" rel="stylesheet" type="text/css" media="all" />
+</head>
+
+<body>
+
+{% for ff in form_fields %}
+<div class="content">
+
+		<h1> {{ ff.form_title }} </h1>
+
+		<div class="main">
+
+			{% if ff.vacancy == False %}
+				<script> 
+					alert("No Vacancy!") 
+					window.location.href = "{% url 'index' %}"
+				</script>
+				
+			{% else %}
+
+			<form class="contact-forms" method="post" enctype="multipart/form-data">
+				<!-- end /.header-->
+				{% if ff.first_name == True %}
+				<div class="first-line">
+					<div class="span8 main-row">
+						<div class="input">	
+							<input type="text" id="first_name" placeholder="First Name" name="first_name" required>
+						</div>
+					</div>
+				</div>
+				{% else %} 
+					<input type="hidden" name="first_name" value="-">
+				{% endif %}
+
+				{% if ff.last_name == True %}
+				<div class="first-line">
+					<div class="span8 main-row">
+						<div class="input">	
+							<input type="text" id="last_name" placeholder="Last Name" name="last_name" required>
+						</div>
+					</div>
+				</div>
+				{% else %} 
+					<input type="hidden" name="last_name" value="-">
+				{% endif %}
+
+				{% if ff.contact_no == True %}
+				<div class="first-line">
+					<div class="span8 main-row">
+						<div class="input">	
+							<input type="text" id="contact_no" placeholder="Contact No" name="contact_no" required>
+						</div>
+					</div>
+				</div>
+				{% else %} 
+					<input type="hidden" name="contact_no" value="-">
+				{% endif %}
+
+				{% if ff.email_id == True %}
+				<div class="first-line">
+					<div class="span8 main-row">
+						<div class="input">	
+							<input type="text" id="email" placeholder="Email" name="email" required>
+						</div>
+					</div>
+				</div>
+				{% else %} 
+					<input type="hidden" name="email" value="-">
+				{% endif %}
+
+				{% if ff.dob == True %}
+				<div class="first-line">
+					<div class="span8 main-row">
+						<div class="input">	
+							<input type="text" id="dob" placeholder="Date of Birth" name="dob">
+						</div>
+					</div>
+				</div>
+				{% else %} 
+					<input type="hidden" name="dob" value="-">
+				{% endif %}
+
+				{% if ff.address == True %}
+				<div class="first-line">
+					<div class="span8 main-row">
+						<div class="input">	
+							<input type="text" id="address" placeholder="Address" name="address" required>
+						</div>
+					</div>
+				</div>
+				{% else %} 
+					<input type="hidden" name="address" value="-">
+				{% endif %}
+
+				{% if ff.zip_code == True %}
+				<div class="first-line">
+					<div class="span8 main-row">
+						<div class="input">	
+							<input type="text" id="zip_code" placeholder="ZIP Code" name="zip_code">
+						</div>
+					</div>
+				</div>
+				{% else %} 
+					<input type="hidden" name="zip_code" value="-">
+				{% endif %}
+
+				{% if ff.city == True %}
+				<div class="first-line">
+					<div class="span8 main-row">
+						<div class="input">	
+							<input type="text" id="city" placeholder="City" name="city">
+						</div>
+					</div>
+				</div>
+				{% else %} 
+					<input type="hidden" name="city" value="-">
+				{% endif %}
+
+				{% if ff.state == True %}
+				<div class="first-line">
+					<div class="span8 main-row">
+						<div class="input">	
+							<input type="text" id="state" placeholder="State" name="state">
+						</div>
+					</div>
+				</div>
+				{% else %} 
+					<input type="hidden" name="state" value="-">
+				{% endif %}
+
+				{% if ff.aadhar_card == True %}
+				<div class="first-line">
+					<div class="span8 main-row">
+						<div class="input">	
+							<input type="text" id="aadhar_card" placeholder="Aadhar Card Number" name="aadhar_card" required>
+						</div>
+					</div>
+				</div>
+				{% else %} 
+					<input type="hidden" name="aadhar_card" value="-">
+				{% endif %}
+
+				{% if ff.pan_card == True %}
+				<div class="first-line">
+					<div class="span8 main-row">
+						<div class="input">	
+							<input type="text" id="pan_card" placeholder="Pan Card Number" name="pan_card" required>
+						</div>
+					</div>
+				</div>
+				{% else %} 
+					<input type="hidden" name="pan_card" value="-">
+				{% endif %}
+
+				{% if ff.availability == True %}
+				<div class="main-row">
+					<label class="input select">
+						<select name="availability">
+							<option value="none" selected disabled="">Availability</option>
+							<option value="full time">Full Time</option>
+							<option value="part time">Part Time</option>
+						</select>
+					</label>
+				</div>
+				{% else %} 
+					<input type="hidden" name="availability" value="-">
+				{% endif %}
+
+				{% if ff.salary == True %}
+				<div class="first-line">
+					<div class="span8 main-row">
+						<div class="input">	
+							<input type="text" id="salary" placeholder="Salary" name="salary">
+						</div>
+					</div>
+				</div>
+				{% else %} 
+					<input type="hidden" name="salary" value="-">
+				{% endif %}
+
+				{% if ff.experience == True %}
+				<div class="first-line">
+					<div class="span8 main-row">
+						<div class="input">	
+							<input type="text" id="experience" placeholder="Experience" name="experience">
+						</div>
+					</div>
+				</div>
+				{% else %} 
+					<input type="hidden" name="experience" value="-">
+				{% endif %}
+
+				{% if ff.add_info == True %}
+				<div class="first-line">
+					<div class="span8 main-row">
+						<div class="input">	
+							<input type="text" id="add_info" placeholder="Additional Information" name="add_info">
+						</div>
+					</div>
+				</div>
+				{% else %} 
+					<input type="hidden" name="add_info" value="-">
+				{% endif %}
+
+				{% if ff.resume == True %}
+				<div class=" main-row">
+					<label class="input append-small-btn">
+						<div class="upload-btn">
+							Browse
+							<input type="file" name="resume" onchange="document.getElementById('file1_input').value = this.value;">
+						</div>
+						<input type="text" id="file1_input" readonly="" placeholder="Add your CV">
+						<span class="hint">Only: pdf / doc Size: lessthan 1 Mb</span>
+					</label>
+				</div>
+				{% else %} 
+					<input type="hidden" name="resume" value="-">
+				{% endif %}
+
+				<input type="hidden" name="job_type" value="Waiter">
+
+			{% endif %}
+
+				<!-- end /.content -->
+				{% csrf_token %}
+				<div class="footer">
+					<button type="submit" class="primary-btn">Submit</button>
+					<button type="reset" class="secondary-btn">Reset</button>
+				</div>
+				<!-- end /.footer -->
+
+			</form>
+		</div>
+		
+		<p class="copy_rights">&copy; 2023 Job Application Form. All Rights Reserved | Design by  Chirag & Pruthvi</a></p>
+</div>
+{% endfor %}
+
+		<!-- Scripts -->
+		<script src="/static/js/jquery.1.11.1.min.js"></script>
+
+		<!--[if lt IE 10]>
+				<script src="j-folder/js/jquery.placeholder.min.js"></script>
+			<![endif]-->
+
+		<script>
+			$(document).ready(function(){
+
+				// Phone masking
+				$('#phone').mask('(999) 999-9999', {placeholder:'x'});
+
+				// Post code masking
+				$('#post').mask('999-9999', {placeholder:'x'});
+
+			});
+		</script>
+</body>
+</html>
